@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="d3.js"></script>
+    <style>
+        div.bar {
+            display: inline-block;
+            background-color:DarkRed;
+            color:white;
+            vertical-align:bottom;
+        }
+    </style>
+    <script>
+    function draw(data) {
+        "use strict";
+        d3.select("body")
+          .append("div")
+          .selectAll(".bar")
+          .data(data)
+          .enter()
+          .append("div")
+            .attr("class","bar")
+            .style("width", function(d){return d.x + "px"})
+            .style("height", function(d){return d.y + "px"})
+            .style("outline", "1px solid black")
+            .text(function(d){return Math.round(d.y)});
+    }
+    </script>
+</head>
+<body>
+    <script>
+        d3.json("data/barexample.json",draw);
+    </script>
+</body>
+</html>
